@@ -51,7 +51,6 @@ class SlackHooks {
         .'"text": "'.$message.'",'
         .'"fields": ['
           .'{"title": "Summary", "value": "'.SlackHooks::encodeSlackChars($summary).'", "short": false},'
-          .'{"title": "Updated Content", "value": "'.SlackHooks::encodeSlackChars($content->getTextForSummary()).'", "short": false}'
         .']'
       .'}';
 
