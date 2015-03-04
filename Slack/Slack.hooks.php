@@ -33,13 +33,13 @@ class SlackHooks {
       wfDebug("Slack URL: ".$wgSlackWebhookURL."\n");
 
       // Build the message we're going to post to Slack.
-      $message = '*<'.SlackHooks::encodeSlackChars($article->getTitle()->getFullURL())
-                     .'|'.SlackHooks::encodeSlackChars($article->getTitle()).'>* '
-                .'modified by *';
+      $message = '<'.SlackHooks::encodeSlackChars($article->getTitle()->getFullURL())
+                     .'|'.SlackHooks::encodeSlackChars($article->getTitle()).'> '
+                .'modified by ';
       if ($wgSlackLinkUsers) {
         $message .= '@';
       }
-      $message .= SlackHooks::encodeSlackChars(strtolower($user->getName())).'*';
+      $message .= SlackHooks::encodeSlackChars(strtolower($user->getName()));
 
       // Build the WebHook Payload.
       // NB: The Slack parser chokes if there is a trailing , at the end of the list of items
