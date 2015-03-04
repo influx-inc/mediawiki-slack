@@ -48,10 +48,10 @@ class SlackHooks {
         .'"channel": "'.$wgSlackChannel.'",'
         .'"color": "good",'
         .'"username": "'.$wgSlackUserName.'",'
-        .'"text": "'.$message.'"'
+        .'"text": "'.$message.'",'
         .'"fields": ['
           .'{"title": "Summary", "value": "'.SlackHooks::encodeSlackChars($summary).'", "short": false},'
-          .'{"title": "Content", "value": "'.SlackHooks::encodeSlackChars($content->getTextForSummary()).'", "short": false}'
+          .'{"title": "Updated Content", "value": "'.SlackHooks::encodeSlackChars($content->getTextForSummary()).'", "short": false}'
         .']'
       .'}';
 
