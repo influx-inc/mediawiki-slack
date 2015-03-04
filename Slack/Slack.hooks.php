@@ -39,19 +39,21 @@ class SlackHooks {
       if ($wgSlackLinkUsers) {
         $message .= '@';
       }
-      $message .= SlackHooks::encodeSlackChars(strtolower($user->getName())).'*: '
-                 .SlackHooks::encodeSlackChars($summary).'.';
+      $message .= SlackHooks::encodeSlackChars(strtolower($user->getName())).'*';
 
       // Build the WebHook Payload.
       // NB: The Slack parser chokes if there is a trailing , at the end of the list of items
       //     in the payload. Make sure any optional items are in the middle to avoid this.
-      $payload = '{"channel": "'.$wgSlackChannel.'",';
-      if ($wgSlackLinkUsers) {
-        $payload .= '"link_names": "1",';
-      }
-      $payload .= '"username": "'.$wgSlackUserName.'",'
-                 .'"text": "'.$message.'"'
-                 .'}';
+      $payload = '{'
+        .'"channel": "'.$wgSlackChannel.'",'
+        .'"color": "good",'
+        .'"username": "'.$wgSlackUserName.'",'
+        .'"text": "'.$message.'"'
+        .'"fields": ['
+          .'{"title": "Summary", "value": "'.SlackHooks::encodeSlackChars($summary).'", "short": false},'
+          .'{"title": "Content", "value": "'.SlackHooks::encodeSlackChars($content).'", "short": false}'
+        .']'
+      .'}';
 
       wfDebug("Slack Payload: ".$payload."\n");
 
