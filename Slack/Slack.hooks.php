@@ -26,7 +26,7 @@ class SlackHooks {
     return $o;
   }
 
-  public static function onPageContentSaveComplete( $article, $user, $content, $summary, $isMinor, 
+  public static function onPageContentSaveComplete( $article, $user, $content, $summary, $isMinor,
     $isWatch, $section, $flags, $revision, $status, $baseRevId ) {
       global $wgSlackWebhookURL, $wgSlackChannel, $wgSlackUserName, $wgSlackLinkUsers;
 
@@ -51,7 +51,7 @@ class SlackHooks {
         .'"text": "'.$message.'"'
         .'"fields": ['
           .'{"title": "Summary", "value": "'.SlackHooks::encodeSlackChars($summary).'", "short": false},'
-          .'{"title": "Content", "value": "'.SlackHooks::encodeSlackChars($content).'", "short": false}'
+          .'{"title": "Content", "value": "'.SlackHooks::encodeSlackChars($content->getTextForSummary()).'", "short": false}'
         .']'
       .'}';
 
