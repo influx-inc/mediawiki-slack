@@ -50,7 +50,7 @@ class SlackHooks {
         .'"username": "'.$wgSlackUserName.'",'
         .'"text": "'.$message.'",'
         .'"fields": ['
-          .'{"title": "Summary", "value": "'.SlackHooks::encodeSlackChars($summary).'", "short": false},'
+          .'{"title": "Summary", "value": "'.SlackHooks::encodeSlackChars($summary).'", "short": false}'
         .']'
       .'}';
 
