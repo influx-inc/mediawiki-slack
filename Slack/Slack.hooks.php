@@ -28,7 +28,7 @@ class SlackHooks {
 
   public static function onPageContentSaveComplete( $article, $user, $content, $summary, $isMinor,
     $isWatch, $section, $flags, $revision, $status, $baseRevId ) {
-      global $wgSlackWebhookURL, $wgSlackChannel, $wgSlackUserName, $wgSlackLinkUsers;
+      global $wgSlackWebhookURL, $wgSlackUserName, $wgSlackLinkUsers;
 
       wfDebug("Slack URL: ".$wgSlackWebhookURL."\n");
 
@@ -45,7 +45,7 @@ class SlackHooks {
       // NB: The Slack parser chokes if there is a trailing , at the end of the list of items
       //     in the payload. Make sure any optional items are in the middle to avoid this.
       $payload = '{'
-        .'"channel": "'.$wgSlackChannel.'",'
+        .'"channel": "#'.strtolower($article->getTitle()).'",'
         .'"color": "good",'
         .'"username": "'.$wgSlackUserName.'",'
         .'"text": "'.$message.'",'
